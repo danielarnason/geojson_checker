@@ -1,28 +1,47 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <div class="cell cell-map"><MapContainer/></div>
+    <div class="cell cell-json"></div>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
-
+import MapContainer from './components/MapContainer.vue'
 export default {
   name: 'App',
   components: {
-    HelloWorld
+    MapContainer
   }
 }
 </script>
 
 <style>
+html, body {
+  height: 100%;
+  margin: 0;
+}
+
 #app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+  height: 100%;
+  display: grid;
+  grid-template-rows: repeat(2, 1fr);
+  grid-template-columns: repeat(3, 1fr );
+  grid-template-areas: 
+    "map map json"
+    "map map json";
+  gap: 1rem;
+}
+
+.cell {
+  background-color: lightgrey;
+  border-radius: 5px;
+}
+
+.cell-map {
+  grid-area: map;
+}
+
+.cell-json {
+  grid-area: json;
 }
 </style>
