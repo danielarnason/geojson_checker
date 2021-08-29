@@ -13,9 +13,9 @@ export default {
             map: null,
         }
     },
-    props: [
-        'geojson'
-    ],
+    props: {
+        geojson: Object
+    },
     mounted: function () {
         let ref = this;
 
@@ -31,6 +31,11 @@ export default {
               geojsonLyr
             ]
         })
+    },
+    watch: {
+        geojson: function (value) {
+            L.geoJSON(value).addTo(this.map);
+        }
     }
 }
 </script>
