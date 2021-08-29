@@ -1,16 +1,23 @@
 <template>
   <div id="app">
-    <div class="cell cell-map"><MapContainer :geojson="this.geojson"/></div>
-    <div class="cell cell-json"></div>
+    <div class="cell cell-map">
+      <MapContainer :geojson="this.geojson"/>
+    </div>
+    <div class="cell cell-json">
+      <GeojsonEditor :geojson="this.geojson"/>
+    </div>
   </div>
 </template>
 
 <script>
 import MapContainer from './components/MapContainer.vue'
+import GeojsonEditor from './components/GeojsonEditor.vue'
+
 export default {
   name: 'App',
   components: {
-    MapContainer
+    MapContainer,
+    GeojsonEditor
   },
   data () {
     return {
@@ -70,6 +77,8 @@ html, body {
     "map map json"
     "map map json";
   gap: 1rem;
+  padding: 1rem;
+  box-sizing: border-box;
 }
 
 .cell {
