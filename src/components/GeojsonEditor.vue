@@ -1,16 +1,21 @@
 <template>
-  <textarea name="geojson" id="geojson" v-model="this.geojsonStr"></textarea>
+  <textarea name="geojson" id="geojson" v-model="geojsonStr"></textarea>
 </template>
 
 <script>
 export default {
     name: 'GeojsonEditor',
-    props: [
-        'geojson'
-    ],
+    props: {
+        geojson: Object
+    },
     computed: {
-        geojsonStr () {
-            return JSON.stringify(this.geojson, null, ' ');
+        geojsonStr: {
+            get: function () {
+                return JSON.stringify(this.geojson, null, ' ');
+            },
+            set: function (value) {
+                this.$emit('change', JSON.parse(value));
+            }
         }
     }
 }
