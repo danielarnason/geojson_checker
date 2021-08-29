@@ -11,6 +11,7 @@ export default {
     data () {
         return {
             map: null,
+            geoJSONLyr: null
         }
     },
     props: {
@@ -18,8 +19,6 @@ export default {
     },
     mounted: function () {
         let ref = this;
-
-        let geojsonLyr = L.geoJSON(ref.geojson);
         
         ref.map = L.map('mapcontainer', {
             center: [56.2, 9.5],
@@ -27,14 +26,20 @@ export default {
             layers: [
                 L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
                     attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-              }),
-              geojsonLyr
+              })
             ]
         })
     },
     watch: {
         geojson: function (value) {
-            L.geoJSON(value).addTo(this.map);
+            if (this.geoJSONLyr === null) {
+                this.geoJSONLyr = L.geoJSON(value)
+                this.geoJSONLyr.addTo(this.map);
+            } else {
+                this.geoJSONLyr.remove()
+                this.geoJSONLyr = L.geoJSON(value)
+                this.geoJSONLyr.addTo(this.map);
+            }
         }
     }
 }
