@@ -35,10 +35,12 @@ export default {
             if (this.geoJSONLyr === null) {
                 this.geoJSONLyr = L.geoJSON(value)
                 this.geoJSONLyr.addTo(this.map);
+                this.map.flyToBounds(this.geoJSONLyr.getBounds())
             } else {
                 this.geoJSONLyr.remove()
                 this.geoJSONLyr = L.geoJSON(value)
                 this.geoJSONLyr.addTo(this.map);
+                this.map.flyToBounds(this.geoJSONLyr.getBounds())
             }
         }
     }
