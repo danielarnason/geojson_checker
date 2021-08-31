@@ -1,3 +1,5 @@
 module.exports = {
-    publicPath: '/geojson_checker/'
+    publicPath: process.env.NODE_ENV === 'production'
+        ? '/geojson_checker/'
+        : '/'
 }
